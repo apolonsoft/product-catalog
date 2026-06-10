@@ -19,8 +19,8 @@ const { data, pending, error } = await useFetch("/api/hello", {
             There is an error. {{ error.data.message }}
         </p>
         <ul v-else class="list-disc list-inside p-4">
-            <li v-for="(fruit, index) in data?.databases" :key="index">
-                {{ fruit }}
+            <li v-for="(product, index) in data?.products" :key="index">
+                {{ product.name }}
             </li>
         </ul>
         {{ counter }}

@@ -33,6 +33,7 @@
     "@unhead/vue": "^2.0.3 || ^3.0.0",
     "better-sqlite3": "^12.10.0",
     "drizzle-orm": "^0.45.2",
+    "drizzle-seed": "^0.3.1",
     "eslint": "^9.0.0 || ^10.0.0",
     "nuxt": "^4.4.7",
     "pinia": "^3.0.4",
