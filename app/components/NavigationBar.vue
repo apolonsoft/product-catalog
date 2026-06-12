@@ -40,7 +40,6 @@ onMounted(async () => {
 
 async function verifyAuthentication() {
     const token = useCookie("jwt_token");
-    console.log(token);
     if (!token.value) {
         return;
     }

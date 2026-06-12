@@ -3,6 +3,10 @@ import NavigationBar from '~/components/NavigationBar.vue';
 </script>
 
 <template>
+<div>
     <NavigationBar />
-    <slot />
+    <div class="p-4">
+        <slot />
+    </div>
+</div>
 </template>

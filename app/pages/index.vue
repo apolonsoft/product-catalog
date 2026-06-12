@@ -7,7 +7,11 @@ useHead({
 </script>
 
 <template>
-  <PageTitle color-class="text-red-500">
-    Product Catalog Main Page
-  </PageTitle>
+  <div>
+    <PageTitle color-class="text-red-500">
+      Product Catalog Main Page
+    </PageTitle>
+
+    <NuxtImg src="/laptop1.webp" quality="100" alt="laptop1" class="aspect-video" placeholder />
+  </div>
 </template>
