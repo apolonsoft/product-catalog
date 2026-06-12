@@ -1,5 +1,5 @@
 <template>
-    <nav class="flex justify-between p-4 bg-neutral-800">
+    <nav :key="navbarRefreshKey" class="flex justify-between p-4 bg-neutral-800">
         <NuxtLink to="/">
             Home
         </NuxtLink>
@@ -29,18 +29,19 @@
 </template>
 
 <script lang="ts" setup>
+import type { JwtUserInfo } from '../../shared/types/jwt-user-info';
 
-interface User {
-    id: number;
-    username: string;
-}
-
-
-const user = ref<User | null>(null);
+const navbarRefreshKey = useState<number>("navbarRefreshKey", () => 0);
+const user = ref<JwtUserInfo | null>(null);
 
 onMounted(async () => {
-    const token = useCookie("jwt_token")
-    if (!token) {
+    await verifyAuthentication();
+});
+
+async function verifyAuthentication() {
+    const token = useCookie("jwt_token");
+    console.log(token);
+    if (!token.value) {
         return;
     }
     const result = await $fetch('/api/auth/verifyToken', {
@@ -50,6 +51,11 @@ onMounted(async () => {
     if (!result.success) {
         return;
     }
-    user.value = (result.user as any) as User;
+    user.value = result.user.user;
+}
+
+watch(navbarRefreshKey, async () => {
+    await verifyAuthentication();
 })
+
 </script>

@@ -30,7 +30,7 @@ useHead({
 });
 
 const error = ref<string | null>(null);
-
+const navbarRefreshKey =  useState<number>("navbarRefreshKey",() => 0);
 async function submitForm() {
     error.value = null;
     if (!form.username) {
@@ -61,18 +61,19 @@ async function submitForm() {
     }
     //error.value = result._data?.token ?? "No token retrieved."
 
-    if(result._data && result._data.token){
-        useCookie('jwt_token').value = result._data.token;
-    }else {
-        error.value =  "There was an issue in data body."
+    if (!(result._data && result._data.token)) {
+        error.value = "There was an issue in data body.";
+        return;
     }
+    useCookie('jwt_token').value = result._data.token;
+    navbarRefreshKey.value++;
+    await navigateTo('/');
 }
-
 
 const form = reactive({
     username: "",
     password: ""
-})
+});
 </script>
 
 <style scoped>
