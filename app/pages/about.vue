@@ -5,6 +5,10 @@ const { data, pending, error } = await useFetch("/api/hello", {
     server: false
 })
 
+useHead({
+  title: 'About'
+});
+
 </script>
 <template>
     <h5>
