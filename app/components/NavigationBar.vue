@@ -1,5 +1,5 @@
 <template>
-    <nav :key="navbarRefreshKey" class="flex justify-between p-4 bg-neutral-800">
+    <nav class="flex justify-between p-4 bg-neutral-800">
         <NuxtLink to="/">
             Home
         </NuxtLink>
@@ -22,7 +22,12 @@
                 </li>
             </div>
             <div v-else class="inline-flex gap-4">
+                <div class="hover:text-neutral-500 cursor-pointer" @click="logout">
+                    Logout
+                </div>
+                <div>
                 {{ user.username }}
+                </div>
             </div>
         </ul>
     </nav>
@@ -31,30 +36,30 @@
 <script lang="ts" setup>
 import type { JwtUserInfo } from '../../shared/types/jwt-user-info';
 
-const navbarRefreshKey = useState<number>("navbarRefreshKey", () => 0);
-const user = ref<JwtUserInfo | null>(null);
+const refreshKey = useState<number>("navbarRefreshKey", () => 0);
 
-onMounted(async () => {
-    await verifyAuthentication();
+const { data: user } = await useAsyncData<JwtUserInfo | null>("navbar-user", verifyAuthentication, {
+    default: () => null,
+    watch: [refreshKey]
 });
 
-async function verifyAuthentication() {
+async function logout(){
+    useCookie("jwt_token").value = undefined;
+    refreshKey.value++;
+}
+
+async function verifyAuthentication(): Promise<JwtUserInfo | null> {
     const token = useCookie("jwt_token");
     if (!token.value) {
-        return;
+        return null;
     }
     const result = await $fetch('/api/auth/verifyToken', {
         method: 'POST',
         body: { token: token.value }
     });
     if (!result.success) {
-        return;
+        return null;
     }
-    user.value = result.user.user;
+    return result.user.user as JwtUserInfo;
 }
-
-watch(navbarRefreshKey, async () => {
-    await verifyAuthentication();
-})
-
 </script>

@@ -30,7 +30,7 @@ useHead({
 });
 
 const error = ref<string | null>(null);
-const navbarRefreshKey =  useState<number>("navbarRefreshKey",() => 0);
+const refreshKey =  useState<number>("navbarRefreshKey",() => 0);
 async function submitForm() {
     error.value = null;
     if (!form.username) {
@@ -66,7 +66,7 @@ async function submitForm() {
         return;
     }
     useCookie('jwt_token').value = result._data.token;
-    navbarRefreshKey.value++;
+    refreshKey.value++;
     await navigateTo('/');
 }
 
