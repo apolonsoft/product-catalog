@@ -6,4 +6,12 @@ export const productsTable = sqliteTable('products', {
     }),
     name: text().notNull(),
     description: text()
+});
+
+export const usersTable = sqliteTable('users', {
+    id: int().primaryKey({
+        autoIncrement: true
+    }),
+    username: text().notNull(),
+    password: text().notNull()
 })

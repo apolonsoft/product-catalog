@@ -4801,6 +4801,11 @@ baseline-browser-mapping@^2.10.12:
   resolved "https://registry.yarnpkg.com/baseline-browser-mapping/-/baseline-browser-mapping-2.10.34.tgz#dedb606362446777cfe328d30d4ee15056d06303"
   integrity sha512-IMDedajPifLnHNY0X9n8hKxRTQ6/eTHwr5bDo04WnuqxyKw6LYtQywCuuqPZwhl3aBXMvQpJov42GLCwRRdQzw==
 
+bcrypt-ts@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/bcrypt-ts/-/bcrypt-ts-8.0.1.tgz#ff221c0332a3cfa9632b132ae484044642b133b4"
+  integrity sha512-ILrO7U7YieyG+71KVIVVuPCmjN8N9DY3gYs4OiEoJvW8A5HOe4eerRhLD0Rgo2CAyANRKssFGXmLF74zJz094g==
+
 better-sqlite3@^12.10.0:
   version "12.10.0"
   resolved "https://registry.yarnpkg.com/better-sqlite3/-/better-sqlite3-12.10.0.tgz#bde622d14a18008583a53bc53501ae98f1a12221"
