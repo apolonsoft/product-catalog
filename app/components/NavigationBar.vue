@@ -3,13 +3,13 @@
         <NuxtLink to="/">
             Home
         </NuxtLink>
-        <ul class="inline-flex gap-4">
-            <li>
+        <TransitionGroup class="inline-flex gap-4" tag="ul" name="fade-nav">
+            <li key="about">
                 <NuxtLink to="/about">
                     About
                 </NuxtLink>
             </li>
-            <div v-if="!user" class="inline-flex gap-4">
+            <div v-if="!user" key="guest" class="inline-flex gap-4">
                 <li>
                     <NuxtLink to="/register">
                         Register
@@ -21,15 +21,15 @@
                     </NuxtLink>
                 </li>
             </div>
-            <div v-else class="inline-flex gap-4">
+            <div v-else key="user" class="inline-flex gap-4">
                 <div class="hover:text-neutral-500 cursor-pointer" @click="logout">
                     Logout
                 </div>
                 <div>
-                {{ user.username }}
+                    {{ user.username }}
                 </div>
             </div>
-        </ul>
+        </TransitionGroup>
     </nav>
 </template>
 
@@ -43,7 +43,7 @@ const { data: user } = await useAsyncData<JwtUserInfo | null>("navbar-user", ver
     watch: [refreshKey]
 });
 
-async function logout(){
+async function logout() {
     useCookie("jwt_token").value = undefined;
     refreshKey.value++;
 }
@@ -63,3 +63,26 @@ async function verifyAuthentication(): Promise<JwtUserInfo | null> {
     return result.user.user as JwtUserInfo;
 }
 </script>
+
+<style scoped>
+.fade-nav-enter-active,
+.fade-nav-leave-active {
+    transition: all 0.1s ease;
+}
+
+.fade-nav-enter-from {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.fade-nav-leave-to {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.fade-nav-leave-active {
+    position: absolute;
+    right:1rem;
+}
+
+</style>

@@ -5,13 +5,13 @@
                 <label for="username">
                     Username :
                 </label>
-                <input id="username" v-model="form.username" type="text" name="username">
+                <input id="username" v-model="form.username" autocomplete="none" type="text" name="username">
             </div>
             <div class="flex gap-2 items-center justify-center">
                 <label for="password">
                     Password :
                 </label>
-                <input id="password" v-model="form.password" type="password" name="password">
+                <input id="password" v-model="form.password" autocomplete="none" type="password" name="password">
             </div>
             <button type="submit" class="px-6!">
                 Register
